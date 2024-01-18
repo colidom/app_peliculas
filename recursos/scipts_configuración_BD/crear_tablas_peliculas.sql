@@ -1,5 +1,5 @@
 -- curso: despliegue de aplicaciones web
--- script de creación de tablas
+-- script de creaciÃ³n de tablas
 
 drop table if exists puntuaciones;
 drop table if exists usuarios;
@@ -43,9 +43,3 @@ alter table puntuaciones
 	add foreign key (login) references usuarios (login) 
 		on delete  restrict 
 		on update  restrict;
-
-
-
-
-
-
