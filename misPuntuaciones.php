@@ -97,7 +97,7 @@ if (1 == $VALIDADO) {
                 echo "<td class=\"mostrar\" align=\"center\">NP</td>";
             }
 
-            echo "<td> <input type=\"button\" name=\"Mas Datos\" value=\"Mas Datos\" onClick=\"document.formulario_puntuacion.codigo_pelicula.value='" . $reg["codigo_pelicula"] . "';document.formulario_puntuacion.submit()\"> </td>";
+            echo "<td> <input type=\"button\" name=\"Más Datos\" value=\"Más Datos\" onClick=\"document.formulario_puntuacion.codigo_pelicula.value='" . $reg["codigo_pelicula"] . "';document.formulario_puntuacion.submit()\"> </td>";
             echo "</tr>";
 
         }

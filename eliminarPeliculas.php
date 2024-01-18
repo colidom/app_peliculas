@@ -157,7 +157,7 @@ if ((1 == $VALIDADO) && (0 == $tipo_usuario)) //Si el usuario se ha validado y e
             echo "<td colspan='3' height=\"30\"></td>";
             echo "</tr>";
             echo "<tr border=\"1\">";
-            echo "<td colspan='3' class=\"mostrar\" align=\"center\"><input type='submit' name='eliminar' value='Eliminar peliculas seleccionadas' onClick=\"return confirmar('�Desea borrar las peliculas seleccionadas y sus puntuaciones ?')\"></td>";
+            echo "<td colspan='3' class=\"mostrar\" align=\"center\"><input type='submit' name='eliminar' value='Eliminar peliculas seleccionadas' onClick=\"return confirmar('¿Desea borrar las peliculas seleccionadas y sus puntuaciones ?')\"></td>";
             echo "</tr>";
         }
         echo "<tr border=\"1\">";

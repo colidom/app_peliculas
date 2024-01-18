@@ -80,20 +80,21 @@ if ((1 == $VALIDADO) && (0 == $tipo_usuario)) //Si el usuario se ha validado   y
     //Si se ha enviado el fornulario y  ho hay errores
     if (isset($modificar) && false == $error) {
         $conexion = new ConexionBD;
-        $conexion->conectar_bd();
+        $con = $conexion->conectar_bd();
+
         $sql = "UPDATE peliculas SET director='" . $director . "' WHERE codigo_pelicula=" . $codigo_pelicula;
-        $result = mysqli_query($sql) or die("Error en la sentencia SQL<br><br>" . $sql . "<br><br>");
+        $result = mysqli_query($con, $sql) or die("Error en la sentencia SQL<br><br>" . $sql . "<br><br>");
         $sql = "UPDATE peliculas SET genero='" . $genero . "' WHERE codigo_pelicula=" . $codigo_pelicula;
-        $result = mysqli_query($sql) or die("Error en la sentencia SQL<br><br>" . $sql . "<br><br>");
+        $result = mysqli_query($con, $sql) or die("Error en la sentencia SQL<br><br>" . $sql . "<br><br>");
         $sql = "UPDATE peliculas SET estreno=" . $estreno . " WHERE codigo_pelicula=" . $codigo_pelicula;
-        $result = mysqli_query($sql) or die("Error en la sentencia SQL<br><br>" . $sql . "<br><br>");
+        $result = mysqli_query($con, $sql) or die("Error en la sentencia SQL<br><br>" . $sql . "<br><br>");
         $sql = "UPDATE peliculas SET publico=" . $publico . " WHERE codigo_pelicula=" . $codigo_pelicula;
-        $result = mysqli_query($sql) or die("Error en la sentencia SQL<br><br>" . $sql . "<br><br>");
+        $result = mysqli_query($con, $sql) or die("Error en la sentencia SQL<br><br>" . $sql . "<br><br>");
 
         if ($copiarFichero) {
             // Se borra la imagen antigua si existe
             $sql = "SELECT imagen FROM peliculas WHERE codigo_pelicula=" . $codigo_pelicula;
-            $result = mysqli_query($sql) or die("Error en la sentencia SQL<br><br>" . $sql . "<br><br>");
+            $result = mysqli_query($con, $sql) or die("Error en la sentencia SQL<br><br>" . $sql . "<br><br>");
             $reg = mysqli_fetch_array($result);
             if ($reg) {
                 if ((null != $reg["imagen"]) && (strcmp(trim($reg["imagen"]), "") != 0)) {
@@ -103,7 +104,7 @@ if ((1 == $VALIDADO) && (0 == $tipo_usuario)) //Si el usuario se ha validado   y
 
             $sql = "UPDATE peliculas SET imagen='" . $nombreFichero . "' WHERE codigo_pelicula=" . $codigo_pelicula;
             //echo $sql;
-            $result = mysqli_query($sql) or die("Error en la sentencia SQL<br><br>" . $sql . "<br><br>");
+            $result = mysqli_query($con, $sql) or die("Error en la sentencia SQL<br><br>" . $sql . "<br><br>");
 
             //Mover fichero de imagen a su ubicación definitiva
             move_uploaded_file($_FILES['imagen']['tmp_name'], $nombreDirectorio . $nombreFichero);
@@ -147,11 +148,11 @@ $conexion->cerrar_conexion();
   <?php
 
         $conexion = new ConexionBD;
-        $conexion->conectar_bd();
+        $con = $conexion->conectar_bd();
 
         $sql = "SELECT * FROM peliculas WHERE codigo_pelicula=" . $codigo_pelicula;
 
-        $result = mysqli_query($sql) or die("Error en la sentencia SQL<br><br>" . $sql . "<br><br>");
+        $result = mysqli_query($con, $sql) or die("Error en la sentencia SQL<br><br>" . $sql . "<br><br>");
         $reg = mysqli_fetch_array($result);
         $conexion->cerrar_conexion();
 
