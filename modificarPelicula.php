@@ -96,21 +96,30 @@ if ((1 == $VALIDADO) && (0 == $tipo_usuario)) //Si el usuario se ha validado   y
             $sql = "SELECT imagen FROM peliculas WHERE codigo_pelicula=" . $codigo_pelicula;
             $result = mysqli_query($con, $sql) or die("Error en la sentencia SQL<br><br>" . $sql . "<br><br>");
             $reg = mysqli_fetch_array($result);
-            if ($reg) {
-                if ((null != $reg["imagen"]) && (strcmp(trim($reg["imagen"]), "") != 0)) {
-                    unlink($nombreDirectorio . $reg["imagen"]);
+
+            if ($reg && !empty($reg["imagen"])) {
+                $imagenAntigua = $nombreDirectorio . $reg["imagen"];
+
+                if (file_exists($imagenAntigua)) {
+                    unlink($imagenAntigua);
                 }
             }
 
+            // Actualizar la base de datos con el nuevo nombre de la imagen
             $sql = "UPDATE peliculas SET imagen='" . $nombreFichero . "' WHERE codigo_pelicula=" . $codigo_pelicula;
-            //echo $sql;
             $result = mysqli_query($con, $sql) or die("Error en la sentencia SQL<br><br>" . $sql . "<br><br>");
 
-            //Mover fichero de imagen a su ubicación definitiva
-            move_uploaded_file($_FILES['imagen']['tmp_name'], $nombreDirectorio . $nombreFichero);
-        }
+            // Mover fichero de imagen a su ubicación definitiva
+            $imagenTemporal = $_FILES['imagen']['tmp_name'];
+            $ubicacionDestino = $nombreDirectorio . $nombreFichero;
 
+            if (!is_dir($nombreDirectorio)) {
+                mkdir($nombreDirectorio, 0777, true);
+            }
+            move_uploaded_file($imagenTemporal, $ubicacionDestino);
+        }
         ?>
+
 
      <table width="500" border="0"  align="center" cellspacing="0" cellpadding="4">
      <tr border="0">
