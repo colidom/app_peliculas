@@ -63,7 +63,7 @@ if ($VALIDADO==1)
           $sql_query="SELECT puntuacion FROM puntuaciones WHERE codigo_pelicula=".$codigo_pelicula." AND login='".$login."'";
           $result_query = mysqli_query($sql_query) or die("Error en la sentencia SQL<br><br>".$sql_query."<br><br>");
           $reg_query = mysqli_fetch_array ($result_query) ;
-          if ($reg_query) //El usuario ya ha puntuado esa pelicula  -> se actualiza su puntuaci�n
+          if ($reg_query) //El usuario ya ha puntuado esa pelicula  -> se actualiza su puntuación
           {
             $sql_update="UPDATE puntuaciones SET puntuacion=".$puntuacion." WHERE codigo_pelicula=".$codigo_pelicula." AND login='".$login."'";
             $result_update = mysqli_query($sql_update) or die("Error en la sentencia SQL<br><br>".$sql_update."<br><br>");
@@ -72,16 +72,16 @@ if ($VALIDADO==1)
             else
                 $sql_update="UPDATE puntuaciones SET comentario='".$comentario."' WHERE codigo_pelicula=".$codigo_pelicula." AND login='".$login."'";
             $result_update = mysqli_query($sql_update) or die("Error en la sentencia SQL<br><br>".$sql_update."<br><br>");
-            echo "<tr><td colspan=\"4\" class=\"formulario\">Pelicula puntuada correctamente (Puntuaci�n actualizada)<tr><td> ";
+            echo "<tr><td colspan=\"4\" class=\"formulario\">Pelicula puntuada correctamente (Puntuación actualizada)<tr><td> ";
           }
-          else //el usuario no ha puntuado la pel�cula
+          else //el usuario no ha puntuado la película
           {
             if (trim($comentario) == "")
                $sql_insert="INSERT INTO puntuaciones VALUES(".$codigo_pelicula.",'".$login."',".$puntuacion.",NULL)";
             else
                $sql_insert="INSERT INTO puntuaciones VALUES(".$codigo_pelicula.",'".$login."',".$puntuacion.",'".$comentario."')";
             $result_update = mysqli_query($sql_insert) or die("Error en la sentencia SQL<br><br>".$sql_insert."<br><br>");
-            echo "<tr><td colspan=\"4\" class=\"formulario\">Pelicula puntuada correctamente (1� Puntuacion)<tr><td>";
+            echo "<tr><td colspan=\"4\" class=\"formulario\">Pelicula puntuada correctamente (1- Puntuacion)<tr><td>";
           }
            echo "<tr><td height=\"20\" colspan=\"4\"><tr><td>";
 
@@ -100,7 +100,7 @@ if ($VALIDADO==1)
   ?>
 
           <tr >
-             <td colspan="2"  class="formularioTitulo"> DATOS DE LA PEL�CULA </td>
+             <td colspan="2"  class="formularioTitulo"> DATOS DE LA PELíCULA </td>
           </tr>
           <tr >
               <td colspan="4" height="20" colspan="2" class="formularioTitulo"></td>
@@ -110,7 +110,7 @@ if ($VALIDADO==1)
               <td class="datos" width="300"> <?php echo $reg_pelicula["nombre"]; ?>  </td>
           </tr>
           <tr >
-              <td class="formulario" width="200">G�NERO: </td>
+              <td class="formulario" width="200">GÉNERO: </td>
               <td class="datos" width="300"> <?php echo $reg_pelicula["genero"]; ?>  </td>
           </tr>
           <tr >
@@ -122,7 +122,7 @@ if ($VALIDADO==1)
               <td class="datos" width="300"> <?php  if ($reg_pelicula["estreno"]==1) echo "SI"; else echo "NO"; ?>  </td>
           </tr>
           <tr >
-              <td class="formulario" width="200">P�BLICO: </td>
+              <td class="formulario" width="200">PÚBLICO: </td>
               <td class="datos"width="300" > <?php if ($reg_pelicula["publico"]==1) echo "SI"; else echo "NO"; ?>  </td>
           </tr>
 
@@ -135,7 +135,7 @@ if ($VALIDADO==1)
           {
 ?>
               <tr >
-                  <td class="formulario" width="200">PUNTUACI�N MEDIA:</td>
+                  <td class="formulario" width="200">PUNTUACIóN MEDIA:</td>
                   <td class="datos" width="300"> <?php echo $reg_puntuacion["ROUND(AVG(puntuacion),2)"]; ?>  </td>
               </tr>
 <?php
@@ -144,7 +144,7 @@ if ($VALIDADO==1)
           {
 ?>
               <tr class="formulario" >
-                  <td class="formulario" width="200">PUNTUACI�N MEDIA:</td>
+                  <td class="formulario" width="200">PUNTUACIóN MEDIA:</td>
                   <td class="datos" width="300">Nadie ha puntuado esa pelicula</td>
               </tr>
 <?php
@@ -152,7 +152,7 @@ if ($VALIDADO==1)
 ?>
 
 <?php
-          // Se comprueba si el usuario ha puntuado esa pel�cula
+          // Se comprueba si el usuario ha puntuado esa película
           $sql_mipuntuacion="SELECT puntuaciones.puntuacion,puntuaciones.comentario FROM peliculas JOIN puntuaciones ON (peliculas.codigo_pelicula=puntuaciones.codigo_pelicula) ";
           $sql_mipuntuacion=$sql_mipuntuacion." WHERE peliculas.codigo_pelicula=".$codigo_pelicula." AND puntuaciones.LOGIN='".$login."'";
           $result_mipuntuacion = mysqli_query($con, $sql_mipuntuacion) or die("Error en la sentencia SQL<br><br>".$sql_mipuntuacion."<br><br>");
@@ -162,7 +162,7 @@ if ($VALIDADO==1)
 
 ?>
               <tr class="formulario">
-                  <td class="formulario" width="200">MI PUNTUACI�N ACTUAL:  </td>
+                  <td class="formulario" width="200">MI PUNTUACIóN ACTUAL:  </td>
                   <td class="datos" width="300"> <?php echo $reg_mipuntuacion["puntuacion"]; ?>  </td>
               </tr>
 <?php
@@ -171,14 +171,14 @@ if ($VALIDADO==1)
           {
 ?>
               <tr class="formulario">
-                  <td class="formulario" width="200">MI PUNTUACI�N ACTUAL:  </td>
+                  <td class="formulario" width="200">MI PUNTUACIóN ACTUAL:  </td>
                   <td class="datos" width="300"> No he puntuado esta pelicula   </td>
               </tr>
 <?php
           }
 ?>
               <tr >
-                  <td class="formulario" width="200">INTRODUCIR NUEVA PUNTUACI�N:</td>
+                  <td class="formulario" width="200">INTRODUCIR NUEVA PUNTUACIóN:</td>
                   <td class="formulario"><select name="puntuacion" size="1" >
                          <option value="1">1</option>
                          <option value="2">2</option>

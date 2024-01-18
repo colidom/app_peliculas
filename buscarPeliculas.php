@@ -1,14 +1,13 @@
 <?php
 
-include_once("sesiones.php");
+include_once "sesiones.php";
 
 //Se controla si se ha iniciado sesion ( el usuario se ha validado)
-$VALIDADO=validar_sesion($login,$tipo_usuario);
+$VALIDADO = validar_sesion($login, $tipo_usuario);
 
-if ($VALIDADO==1)
-{
+if (1 == $VALIDADO) {
 
-?>
+    ?>
 
 <form name="formulario_busqueda" METHOD="post" ACTION="index.php">
 <input type="hidden" name="pagina" value="mostrarPeliculas.php">
@@ -77,11 +76,10 @@ if ($VALIDADO==1)
 
 
  <?php
-}
-else   //El usuario no ha inicado sesion
+} else //El usuario no ha inicado sesion
 {
 
- ?>
+    ?>
  <table width="600" border="0" height="0" align="center" >
     <tr border="0">
      <td height="170" > </td>
@@ -92,5 +90,5 @@ else   //El usuario no ha inicado sesion
  </table>
 
  <?php
- }
- ?>
+}
+?>

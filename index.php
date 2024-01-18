@@ -1,23 +1,25 @@
 <?php
 session_start();
-include_once("sesiones.php");
-include_once("class.ConexionBD.php");
+include_once "sesiones.php";
+include_once "class.ConexionBD.php";
 
-if (isset($_REQUEST['pagina']))
-	$pagina=$_REQUEST['pagina'];
-else 
-    $pagina="buscarPeliculas.php";
+if (isset($_REQUEST['pagina'])) {
+    $pagina = $_REQUEST['pagina'];
+} else {
+    $pagina = "buscarPeliculas.php";
+}
 
-if (isset($_POST['validar']))
-	$validar = $_POST['validar'];
+if (isset($_POST['validar'])) {
+    $validar = $_POST['validar'];
+}
 
-if (isset($_POST['login']))
-	$login = $_POST['login'];
+if (isset($_POST['login'])) {
+    $login = $_POST['login'];
+}
 
-if (isset($_POST['password']))
-	$password = $_POST['password'];
-
-
+if (isset($_POST['password'])) {
+    $password = $_POST['password'];
+}
 
 ?>
 <!DOCTYPE html>
@@ -39,42 +41,35 @@ if (isset($_POST['password']))
 <?php
 
 //Si se ha enviado el formulario de login
-if (isset($validar))
-{
-   $conexion=new ConexionBD;
-   $con = $conexion->conectar_bd();
+if (isset($validar)) {
+    $conexion = new ConexionBD;
+    $con = $conexion->conectar_bd();
 
-   $sql="SELECT * FROM usuarios WHERE login='".strtoupper($login)."' AND password='".md5($password)."'";
+    $sql = "SELECT * FROM usuarios WHERE login='" . strtoupper($login) . "' AND password='" . md5($password) . "'";
 
-   $result = mysqli_query($con, $sql) or die("Error en la sentencia SQL<br><br>".$sql."<br><br>");
-   //$nfilas = mysqli_num_rows ($result);
-   //echo "Numero filas".$nfilas;
-   $reg = mysqli_fetch_array ( $result );
+    $result = mysqli_query($con, $sql) or die("Error en la sentencia SQL<br><br>" . $sql . "<br><br>");
+    //$nfilas = mysqli_num_rows ($result);
+    //echo "Numero filas".$nfilas;
+    $reg = mysqli_fetch_array($result);
 
-   //Si el usuario existe y su password es correcto -> Se configuran la sesi�n
-   if ($reg)
-   {
+    //Si el usuario existe y su password es correcto -> Se configuran la sesión
+    if ($reg) {
 
-     iniciar_sesion($reg["tipo"], $login);
+        iniciar_sesion($reg["tipo"], $login);
 
+    } else {
+        echo "<SCRIPT LANGUAGE=\"javascript\">";
+        echo "alert(\"Usuario/Password incorrecto\");";
+        //echo "location.href = \"index.php\";";
+        echo "</SCRIPT>";
 
-   }
-   else
-   {
-       echo "<SCRIPT LANGUAGE=\"javascript\">";
-       echo "alert(\"Usuario/Password incorrecto\");";
-       //echo "location.href = \"index.php\";";
-       echo "</SCRIPT>";
-
-   }
-   $conexion->cerrar_conexion();
-
+    }
+    $conexion->cerrar_conexion();
 
 }
 
-
 //Se controla si se ha iniciado sesion ( el usuario se ha validado)
-$VALIDADO=validar_sesion($login,$tipo_usuario);
+$VALIDADO = validar_sesion($login, $tipo_usuario);
 
 ?>
 
@@ -85,10 +80,9 @@ $VALIDADO=validar_sesion($login,$tipo_usuario);
               <table  width="200" border="0" cellspacing="0" >
 
 <?php
-              //Si no se ha iniciado sesion
-              if ($VALIDADO==0)
-              {
-              ?>
+//Si no se ha iniciado sesion
+if (0 == $VALIDADO) {
+    ?>
 
                  <form name="formulario_login" method="post" action="index.php">
                  <tr border="0">
@@ -116,10 +110,9 @@ $VALIDADO=validar_sesion($login,$tipo_usuario);
                  </form>
               <?php
 
-              }
-              else //Si el usuario ha iniciado sesi�n
-              {
-              ?>
+} else //Si el usuario ha iniciado sesión
+{
+    ?>
                  <tr border="0">
                    <td height="130" colspan="2" ></td>
                  </tr>
@@ -139,10 +132,9 @@ $VALIDADO=validar_sesion($login,$tipo_usuario);
                    <td width="200" colspan="2" height="30" class="formulario" ><a class="textoFormulario" href="#" onClick="document.menu.pagina.value='buscarPeliculas.php';document.menu.submit()">Busqueda de películas</a> </td>
                  </tr>
               <?php
-                  //Si el usuario es administrador
-                   if ($tipo_usuario==0)
-                   {
-              ?>
+//Si el usuario es administrador
+    if (0 == $tipo_usuario) {
+        ?>
                        <tr border="0">
                           <td width="200" height="30" colspan="2" class="formulario" ><a class="textoFormulario" href="#" onClick="document.menu.pagina.value='insertarPelicula.php';document.menu.submit()">Alta de películas </a></td>
                        </tr>
@@ -152,8 +144,8 @@ $VALIDADO=validar_sesion($login,$tipo_usuario);
 
 
               <?php
-                   }
-              ?>
+}
+    ?>
                  <tr border="0">
                      <td width="200" height="30" class="formulario" colspan="2"><a class="textoFormulario" href="#" onClick="document.menu.pagina.value='misPuntuaciones.php';document.menu.submit()">Mis puntuaciones </a> </td>
                  </tr>
@@ -163,9 +155,9 @@ $VALIDADO=validar_sesion($login,$tipo_usuario);
                  </tr>
               <?php
 
-              }
+}
 
-              ?>
+?>
 
 
               </table>
@@ -176,7 +168,7 @@ $VALIDADO=validar_sesion($login,$tipo_usuario);
                     <td class="logo" align="center" >Películas</td>
                 </tr>
                  <tr height="500">
-                     <td valign="top"> <?php include($pagina); ?> </td>
+                     <td valign="top"> <?php include $pagina;?> </td>
                  </tr>
              </table>
         </td>
