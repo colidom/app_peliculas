@@ -176,7 +176,7 @@ $conexion->cerrar_conexion();
       </tr>
 
       <tr >
-          <td class="formulario">G�nero: </td>
+          <td class="formulario">Género: </td>
           <td class="formulario">
                <select name="genero" size="1" >
                    <option value="Aventuras" <?php if (strcmp($reg["genero"], 'AVENTURAS') == 0) {
@@ -262,8 +262,8 @@ if (isset($errores["imagen"]) && ("" != $errores["imagen"])) {
 
 
       <tr class="formulario">
-          <td class="formulario" colspan="2" align="center"><input type="submit" name="modificar" value="modificar" /> </td>
-          <td class="formulario" colspan="2" align="center"><input type="reset" name="borrar" value="borrar" /> </td>
+          <td class="formulario" colspan="2" align="center"><input type="submit" name="modificar" value="Modificar" /> </td>
+          <td class="formulario" colspan="2" align="center"><input type="reset" name="Borrar" value="Borrar" /> </td>
       </tr>
       </form>
       <form name="formulario_volver"  METHOD="post" ACTION="index.php">
