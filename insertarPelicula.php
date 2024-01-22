@@ -35,7 +35,7 @@ if ((1 == $VALIDADO) && (0 == $tipo_usuario)) //Si el usuario se ha validado   y
         }
 
         if (strcmp(trim($director), "") == 0) {
-            $errores["director"] = "!Hay que introducir el director de la peícula!";
+            $errores["director"] = "!Hay que introducir el director de la película!";
             $error = true;
         } else {
             $errores["director"] = "";
