@@ -34,7 +34,7 @@ if (1 == $VALIDADO) {
 
     //Conexion a la base de datos
     $conexion = new ConexionBD;
-    $conexion->conectar_bd();
+    $con = $conexion->conectar_bd();
 
     $sql = "select * from peliculas where codigo_pelicula in (select codigo_pelicula from puntuaciones where login='" . $login . "')";
 
@@ -75,7 +75,7 @@ if (1 == $VALIDADO) {
 
             //Se obtiene la puntuacion media de la pelicula
             $sql_puntuacion = "SELECT ROUND(AVG(puntuacion),2) FROM puntuaciones  WHERE codigo_pelicula=" . $reg["codigo_pelicula"];
-            $result_puntuacion = mysqli_query($sql_puntuacion) or die("Error en la sentencia SQL<br><br>" . $sql_puntuacion . "<br><br>");
+            $result_puntuacion = mysqli_query($con, $sql_puntuacion) or die("Error en la sentencia SQL<br><br>" . $sql_puntuacion . "<br><br>");
             $reg_puntuacion = mysqli_fetch_array($result_puntuacion);
             if ($reg_puntuacion) {
                 if (null != $reg_puntuacion["ROUND(AVG(puntuacion),2)"]) //Si la película ha sido puntuada se muestra su media
@@ -89,7 +89,7 @@ if (1 == $VALIDADO) {
 
             //Se obtiene la puntuación del usuario actual
             $sql_mipuntuacion = "SELECT puntuacion FROM puntuaciones  WHERE codigo_pelicula=" . $reg["codigo_pelicula"] . " AND login='" . $login . "'";
-            $result_mipuntuacion = mysqli_query($sql_mipuntuacion) or die("Error en la sentencia SQL<br><br>" . $sql_mipuntuacion . "<br><br>");
+            $result_mipuntuacion = mysqli_query($con, $sql_mipuntuacion) or die("Error en la sentencia SQL<br><br>" . $sql_mipuntuacion . "<br><br>");
             $reg_mipuntuacion = mysqli_fetch_array($result_mipuntuacion);
             if ($reg_mipuntuacion) {
                 echo "<td class=\"mostrar\"align=\"center\" > " . $reg_mipuntuacion["puntuacion"] . " </td>";
