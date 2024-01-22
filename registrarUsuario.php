@@ -14,7 +14,7 @@ function comprobar_email($email)
 
 //Obtener valores enviados por el formulario y convertirlos a mayusculas para insertarlos en la base de datos
 foreach ($_POST as $nombre_campo => $valor) {
-    $asignacion = "\$" . $nombre_campo . "='" . strtoupper($valor) . "';";
+    $asignacion = "\$" . $nombre_campo . "='" . $valor . "';";
     eval($asignacion);
     //echo $asignacion;
 }

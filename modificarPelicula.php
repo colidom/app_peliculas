@@ -13,7 +13,7 @@ if ((1 == $VALIDADO) && (0 == $tipo_usuario)) //Si el usuario se ha validado   y
 
     //Obtener valores enviados por el formulario y convertirlos a mayusculas para modificarlos en la base de datos
     foreach ($_POST as $nombre_campo => $valor) {
-        $asignacion = "\$" . $nombre_campo . "='" . strtoupper($valor) . "';";
+        $asignacion = "\$" . $nombre_campo . "='" . $valor . "';";
         eval($asignacion);
         //echo $asignacion;
     }

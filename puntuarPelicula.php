@@ -33,7 +33,7 @@ if (1 == $VALIDADO) {
 
     //Obtener valores enviados por buscarBar.php
     foreach ($_POST as $nombre_campo => $valor) {
-        $asignacion = "\$" . $nombre_campo . "='" . strtoupper($valor) . "';";
+        $asignacion = "\$" . $nombre_campo . "='" . $valor . "';";
         eval($asignacion);
         //echo $asignacion;
     }
